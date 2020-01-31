@@ -11,13 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     
+    @IBOutlet weak var cityForecastLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        textField.delegate = self
         
     }
 
@@ -48,6 +51,12 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         let itemWidth = maxWidth * 0.25
         let itemHeight = maxHeight * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }
 

@@ -120,7 +120,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="Sg6-db-Ft7"/>
                     <connections>
+                        <outlet property="cityForecastLabel" destination="Ap8-f7-lrG" id="agt-JO-DLu"/>
                         <outlet property="collectionView" destination="64w-Jk-JsD" id="LDN-s9-1ig"/>
+                        <outlet property="textField" destination="cBN-Zi-kfE" id="MEE-HM-JIP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
