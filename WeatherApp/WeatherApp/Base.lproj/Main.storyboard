@@ -1,24 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ji1-mE-wil">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Forecast for (City Name)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap8-f7-lrG">
+                                <rect key="frame" x="48.5" y="108" width="317.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cBN-Zi-kfE">
+                                <rect key="frame" x="157" y="431" width="100" height="34"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="uag-gp-eIL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a Zip Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqG-o6-wiS">
+                                <rect key="frame" x="143" y="485" width="128" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="64w-Jk-JsD">
+                                <rect key="frame" x="0.0" y="169.5" width="414" height="192.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YFg-p4-6KM">
+                                    <size key="itemSize" width="193" height="180.5"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="forecastCell" id="7QR-06-PTw" customClass="ForecastCell" customModule="WeatherApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="6" width="193" height="180.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jaa-aD-Dfh">
+                                            <rect key="frame" x="0.0" y="0.0" width="193" height="180.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00-00-0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWd-Lb-2q8">
+                                                    <rect key="frame" x="47.5" y="8" width="98" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High: 85 F" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9r-hR-Yxv">
+                                                    <rect key="frame" x="56.5" y="100" width="80" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low: 70 F" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpW-br-Yk4">
+                                                    <rect key="frame" x="59.5" y="129" width="74" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear-day" translatesAutoresizingMaskIntoConstraints="NO" id="pot-ka-cn0">
+                                                    <rect key="frame" x="69" y="37" width="55" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="pot-ka-cn0" secondAttribute="height" multiplier="1:1" id="1Va-hs-lsQ"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I9r-hR-Yxv" firstAttribute="top" secondItem="pot-ka-cn0" secondAttribute="bottom" constant="8" id="CUY-bE-qj8"/>
+                                                <constraint firstItem="kWd-Lb-2q8" firstAttribute="centerX" secondItem="jaa-aD-Dfh" secondAttribute="centerX" id="FdU-b3-z3C"/>
+                                                <constraint firstItem="I9r-hR-Yxv" firstAttribute="centerX" secondItem="jaa-aD-Dfh" secondAttribute="centerX" id="GSz-aL-hsY"/>
+                                                <constraint firstItem="pot-ka-cn0" firstAttribute="height" secondItem="jaa-aD-Dfh" secondAttribute="height" multiplier="0.304709" id="MBz-YT-BMF"/>
+                                                <constraint firstItem="pot-ka-cn0" firstAttribute="centerX" secondItem="jaa-aD-Dfh" secondAttribute="centerX" id="RPA-Uq-XS4"/>
+                                                <constraint firstItem="kWd-Lb-2q8" firstAttribute="top" secondItem="jaa-aD-Dfh" secondAttribute="top" constant="8" id="UbP-Bh-TCf"/>
+                                                <constraint firstItem="pot-ka-cn0" firstAttribute="top" secondItem="kWd-Lb-2q8" secondAttribute="bottom" constant="8" id="dJs-Zi-mBc"/>
+                                                <constraint firstItem="FpW-br-Yk4" firstAttribute="centerX" secondItem="jaa-aD-Dfh" secondAttribute="centerX" id="hVA-mP-odU"/>
+                                                <constraint firstItem="FpW-br-Yk4" firstAttribute="top" secondItem="I9r-hR-Yxv" secondAttribute="bottom" constant="8" id="vsq-gD-QC1"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="193" height="180.5"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="kWd-Lb-2q8" id="ckm-pf-oD3"/>
+                                            <outlet property="forecastImage" destination="pot-ka-cn0" id="MQn-gh-h6F"/>
+                                            <outlet property="highTempLabel" destination="I9r-hR-Yxv" id="t7b-N8-lol"/>
+                                            <outlet property="lowTempLabel" destination="FpW-br-Yk4" id="ILp-OV-aSg"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="64w-Jk-JsD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0dN-PE-sAI"/>
+                            <constraint firstItem="cBN-Zi-kfE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6Kb-HK-2Vt"/>
+                            <constraint firstItem="tqG-o6-wiS" firstAttribute="top" secondItem="cBN-Zi-kfE" secondAttribute="bottom" constant="20" id="9in-r5-IV1"/>
+                            <constraint firstItem="64w-Jk-JsD" firstAttribute="top" secondItem="Ap8-f7-lrG" secondAttribute="bottom" constant="35" id="AIf-mp-UzS"/>
+                            <constraint firstItem="Ap8-f7-lrG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PUz-aB-cay"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="64w-Jk-JsD" secondAttribute="trailing" id="ZYD-cx-aPw"/>
+                            <constraint firstItem="cBN-Zi-kfE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="a7J-FN-nst"/>
+                            <constraint firstItem="Ap8-f7-lrG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="fL6-di-Bto"/>
+                            <constraint firstItem="tqG-o6-wiS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hs8-cw-XNB"/>
+                            <constraint firstItem="cBN-Zi-kfE" firstAttribute="top" secondItem="64w-Jk-JsD" secondAttribute="bottom" constant="69" id="oYj-Uo-Wct"/>
+                            <constraint firstItem="64w-Jk-JsD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rZM-f4-Q8j"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Search" id="Sg6-db-Ft7"/>
+                    <connections>
+                        <outlet property="collectionView" destination="64w-Jk-JsD" id="LDN-s9-1ig"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1800.0000000000002" y="-192.1875"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="0fN-fo-IwQ">
+            <objects>
+                <viewController id="F83-Uu-1Rb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1i2-30-8OZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="242-kY-gB1"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" selectedImage="star.fill" catalog="system" id="kd6-kb-cTF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qnl-40-Qs6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="560"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="q7C-IG-6vG">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ji1-mE-wil" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RSe-0a-OLO">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="11P-1b-bY2" kind="relationship" relationship="viewControllers" id="YaE-we-wIh"/>
+                        <segue destination="F83-Uu-1Rb" kind="relationship" relationship="viewControllers" id="iwz-bk-0Fo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fBD-kB-Rms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100" y="95"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="I4d-N5-rmT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="11P-1b-bY2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" selectedImage="magnifyingglass" catalog="system" id="Mnc-aS-tH4"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="udP-tO-dEa">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QOs-7Y-vrS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CaP-re-3Ej" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="889.85507246376824" y="-192.1875"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clear-day" width="55" height="55"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
+        <image name="star.fill" catalog="system" width="64" height="58"/>
+    </resources>
 </document>
