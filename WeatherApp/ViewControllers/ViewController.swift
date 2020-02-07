@@ -11,8 +11,20 @@ import UIKit
 class ViewController: UIViewController {
     
     let acceptableCharacters = CharacterSet(charactersIn: "0123456789").inverted
-   // var unacceptableEntries: [Character] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    var zipCodeEntry = ""
+    // var unacceptableEntries: [Character] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    var zipCode = "11434" {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    var weatherInformation = [Details]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     @IBOutlet weak var cityForecastLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -23,23 +35,49 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         textField.delegate = self
+        getZipCode(zipCode: zipCode)
         
         
     }
-
-
+    
+    
+    
+    func getZipCode(zipCode: String) {
+        ZipCodeHelper.getLatLong(fromZipCode: zipCode) { (result) in
+            switch result {
+            case .failure(let appError):
+                print("Unable to retrieve data: \(appError)")
+            case .success(let coordinates):
+                
+                WeatherAPIClient.fetchWeatherInfo(latitude: coordinates.lat, longitude: coordinates.long) { (result) in
+                    switch result {
+                    case .failure(let appError):
+                        print("Unable to retrieve data: \(appError)")
+                    case .success(let weatherInfo):
+                        self.weatherInformation = weatherInfo
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
 
 extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return weatherInformation.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCell else {
             fatalError("Unable to dequeue ForecastCell")
         }
+        
+        let weatherInfo = weatherInformation[indexPath.row]
+        cell.configureCell(weatherInfo: weatherInfo)
         
         return cell
     }
@@ -63,16 +101,17 @@ extension ViewController: UITextFieldDelegate {
             fatalError("No Valid entry")
         }
         if text.count == 0 || text.count > 5 {
-            // TODO: Add some alert here that says please enter zip code and remove print statement
-            print(" Invalid Entry")
+            // TODO: Add some alert here that says please enter valid zip code and remove print statement
+            print("Please enter a valid zip code")
         } else {
-            
-            zipCodeEntry = text
+            getZipCode(zipCode: text)
+            zipCode = text
             textField.resignFirstResponder()
+            print(zipCode)
         }
         return true
-        }
-        
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let components = string.components(separatedBy: acceptableCharacters)
@@ -85,8 +124,10 @@ extension ViewController: UITextFieldDelegate {
             print("Please enter a valid zipcode")
             return false
             
+            
+            // https://riptutorial.com/ios/example/24016/uitextfield---restrict-textfield-to-certain-characters
         }
-    
+        
     }
-
+    
 }
