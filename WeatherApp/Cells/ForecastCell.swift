@@ -26,8 +26,9 @@ class ForecastCell: UICollectionViewCell {
     
     
     public func configureCell(weatherInfo: Details?) {
-        
-        highTempLabel.text = "\(weatherInfo!.temperatureHigh)"
+        forecastImage.image = UIImage(named: weatherInfo!.icon)
+        highTempLabel.text = "High: \(weatherInfo!.temperatureHigh) F"
+        lowTempLabel.text = "Low: \(weatherInfo!.temperatureLow) F"
         
     }
 }
