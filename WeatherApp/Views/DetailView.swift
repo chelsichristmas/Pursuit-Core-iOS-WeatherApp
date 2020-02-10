@@ -51,10 +51,12 @@ class DetailView: UIView {
     
     private func setupImageView() {
         addSubview(imageView)
-        forecastLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        forecastLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-        forecastLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+        imageView.topAnchor.constraint(equalTo: forecastLabel.bottomAnchor, constant: 10),
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+        imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.40),
+        imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.50)
         ])
     }
 

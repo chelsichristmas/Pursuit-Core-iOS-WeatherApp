@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class DetailViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class DetailViewController: UIViewController {
     
     public var weatherInfo: Details?
     public var cityName: String?
+    public var photoInfo: PhotoDetails?
 
     override func loadView() {
         view = detailView
@@ -22,19 +24,33 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
-        
+        updateUI()
         
  
         
     }
     
+   
     func updateUI() {
         self.detailView.forecastLabel.text = "Weather Forecast for \(cityName!)"
         
+
+
+
+        self.detailView.imageView.getImage(with: photoInfo!.largeImageURL) { (result) in
+            switch result {
+            case .failure(let appError):
+                print("Error getting image: \(appError)")
+            case . success(let image):
+                DispatchQueue.main.async {
+                self.detailView.imageView.image = image
+                }
+            }
+        }
         
     }
     
-     
-    
-
-}
+   
+                
+            }
+       

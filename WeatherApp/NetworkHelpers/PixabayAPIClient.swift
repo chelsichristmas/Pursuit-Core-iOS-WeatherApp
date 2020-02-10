@@ -13,11 +13,11 @@ struct PixabayAPIClient {
     static func fetchPhotos (searchQuery: String, completion: @escaping (Result<[PhotoDetails], AppError>) ->()) {
 
         let APIKey = "15003239-b376045a59a74ecfff7bb35cd"
-        let searchQuery = "blue"
+        let searchQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
 
 
 
-        let pixabayEndpointURL = "https://pixabay.com/api/?key=\(APIKey)&q=\(searchQuery)&image_type=photo"
+        let pixabayEndpointURL = "https://pixabay.com/api/?key=\(APIKey)&q=\(searchQuery ?? "blue")&image_type=photo"
 
 
         guard let url = URL(string: pixabayEndpointURL) else {

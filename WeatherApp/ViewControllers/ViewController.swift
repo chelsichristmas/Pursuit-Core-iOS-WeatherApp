@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var zipCode = "11434" {
         didSet {
             collectionView.reloadData()
+            
         }
     }
     var weatherInformation = [Details]() {
@@ -27,10 +28,11 @@ class ViewController: UIViewController {
     
     var cityName:String? {
         didSet {
-            cityForecastLabel.text = "Weather Forecast for \(cityName!)"
+            cityForecastLabel.text = "Weather Forecast for \(cityName ?? "no name")"
         }
     }
     
+    var photoDetails: PhotoDetails?
     @IBOutlet weak var cityForecastLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -64,6 +66,7 @@ class ViewController: UIViewController {
                         print("Unable to retrieve data: \(appError)")
                     case .success(let weatherInfo):
                         self.weatherInformation = weatherInfo
+                        self.fetchDetailPhoto(searchQuery: self.cityName!)
                         
                         
                     }
@@ -72,6 +75,20 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    func fetchDetailPhoto(searchQuery: String) {
+           
+           
+           PixabayAPIClient.fetchPhotos(searchQuery: searchQuery) { [weak self] (result) in
+               switch result {
+               case .failure:
+                   print("Unable to retrieve detail photo")
+               case .success(let photoInfo):
+                self?.photoDetails = photoInfo.first
+                           }
+                           
+                       }
+                   }
     
     
 }
@@ -111,6 +128,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         let detailVC = DetailViewController()
         detailVC.weatherInfo = forecast
         detailVC.cityName = cityName
+        
+        detailVC.photoInfo = photoDetails
         navigationController?.pushViewController(detailVC, animated: true)
         
 //                let article = newsArticles[indexPath.row]
@@ -125,15 +144,21 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text else {
-            fatalError("No Valid entry")
+        guard textField.text != nil else {
+            
+            
+            return false
         }
-        if text.count == 0 || text.count > 5 {
+        
+        
+        if textField.text?.count != 5 {
             // TODO: Add some alert here that says please enter valid zip code and remove print statement
-            print("Please enter a valid zip code")
+            showAlert(title: "Invalid Entry", message: "Please enter a valid zipcode")
         } else {
-            getZipCode(zipCode: text)
-            zipCode = text
+            
+            let zipcode = textField.text ?? "11234"
+            getZipCode(zipCode: zipcode)
+            zipCode = zipcode
             textField.resignFirstResponder()
             print(zipCode)
         }
@@ -159,3 +184,5 @@ extension ViewController: UITextFieldDelegate {
     }
     
 }
+
+
