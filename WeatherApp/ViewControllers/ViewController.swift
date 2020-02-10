@@ -145,8 +145,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard textField.text != nil else {
-            
-            
             return false
         }
         
