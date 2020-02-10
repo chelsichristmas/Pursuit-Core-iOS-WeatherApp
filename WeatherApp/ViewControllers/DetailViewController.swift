@@ -11,6 +11,9 @@ import UIKit
 class DetailViewController: UIViewController {
     
     private let detailView = DetailView()
+    
+    public var weatherInfo: Details?
+    public var cityName: String?
 
     override func loadView() {
         view = detailView
@@ -18,9 +21,20 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .systemPink
+        
+        
+ 
         
     }
+    
+    func updateUI() {
+        self.detailView.forecastLabel.text = "Weather Forecast for \(cityName!)"
+        
+        
+    }
+    
+     
     
 
 }

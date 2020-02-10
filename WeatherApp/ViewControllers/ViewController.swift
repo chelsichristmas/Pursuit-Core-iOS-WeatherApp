@@ -25,6 +25,12 @@ class ViewController: UIViewController {
         }
     }
     
+    var cityName:String? {
+        didSet {
+            cityForecastLabel.text = "Weather Forecast for \(cityName!)"
+        }
+    }
+    
     @IBOutlet weak var cityForecastLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -41,6 +47,8 @@ class ViewController: UIViewController {
     }
     
     
+   
+    
     
     func getZipCode(zipCode: String) {
         ZipCodeHelper.getLatLong(fromZipCode: zipCode) { (result) in
@@ -48,7 +56,8 @@ class ViewController: UIViewController {
             case .failure(let appError):
                 print("Unable to retrieve data: \(appError)")
             case .success(let coordinates):
-                
+                DispatchQueue.main.async {
+                self.cityName = coordinates.placeName
                 WeatherAPIClient.fetchWeatherInfo(latitude: coordinates.lat, longitude: coordinates.long) { (result) in
                     switch result {
                     case .failure(let appError):
@@ -56,7 +65,9 @@ class ViewController: UIViewController {
                     case .success(let weatherInfo):
                         self.weatherInformation = weatherInfo
                         
+                        
                     }
+                }
                 }
             }
         }
@@ -93,6 +104,23 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         let itemHeight = maxHeight * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let forecast = weatherInformation[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.weatherInfo = forecast
+        detailVC.cityName = cityName
+        navigationController?.pushViewController(detailVC, animated: true)
+        
+//                let article = newsArticles[indexPath.row]
+//        let articleDVC = ArticleDetailViewController()
+//        articleDVC.article = article
+//
+//        // step 4: setting up data persistence and its delegate
+//        articleDVC.dataPersistence = dataPersistence
+//        navigationController?.pushViewController(articleDVC, animated: true)
+    }
 }
 
 extension ViewController: UITextFieldDelegate {
@@ -122,7 +150,7 @@ extension ViewController: UITextFieldDelegate {
             //This line prevents the user from entering anything but a number
             //TODO: Add alert that says please enter a valid zip code
             print("Please enter a valid zipcode")
-            return false
+            return false 
             
             
             // https://riptutorial.com/ios/example/24016/uitextfield---restrict-textfield-to-certain-characters

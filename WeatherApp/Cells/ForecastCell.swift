@@ -18,6 +18,8 @@ class ForecastCell: UICollectionViewCell {
     @IBOutlet weak var highTempLabel: UILabel!
     @IBOutlet weak var lowTempLabel: UILabel!
     
+//    var weatherInfoTitle
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundColor = .yellow
