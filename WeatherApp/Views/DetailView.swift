@@ -9,6 +9,14 @@
 import UIKit
 
 class DetailView: UIView {
+    
+    public lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        button.tintColor = .black
+        return button
+       
+    }()
 
     public lazy var forecastLabel: UILabel = {
        let label = UILabel()
@@ -71,6 +79,7 @@ class DetailView: UIView {
         commonInit()
     }
      private func commonInit() {
+        setupFavoriteButton()
         setupForecastLabel()
         setupImageView()
         setupDescriptionLabel()
@@ -81,12 +90,23 @@ class DetailView: UIView {
         setupPrecipitationLabel()
     }
     
+    private func setupFavoriteButton() {
+        addSubview(favoriteButton)
+              favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+              NSLayoutConstraint.activate([
+                  favoriteButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+                  favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+                  favoriteButton.heightAnchor.constraint(equalToConstant: 20),
+                  favoriteButton.widthAnchor.constraint(equalToConstant: 20)
+              ])
+    }
+    
     private func setupForecastLabel() {
     
         addSubview(forecastLabel)
         forecastLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            forecastLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            forecastLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             forecastLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             forecastLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20)
         ])
@@ -96,10 +116,10 @@ class DetailView: UIView {
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        imageView.topAnchor.constraint(equalTo: forecastLabel.bottomAnchor, constant: 10),
+        imageView.topAnchor.constraint(equalTo: forecastLabel.bottomAnchor, constant: 20),
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.40),
-        imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.50)
+        imageView.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
     
@@ -163,6 +183,8 @@ class DetailView: UIView {
             precipitationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
+    
+    
     
 
 }
