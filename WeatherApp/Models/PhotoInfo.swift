@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct PhotoInfo: Codable {
+struct PhotoInfo: Codable, Equatable {
     let hits: [PhotoDetails]
 }
 
-struct PhotoDetails: Codable {
+struct PhotoDetails: Codable, Equatable {
     let largeImageURL: String
 }
