@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DataPersistence
 
 class ViewController: UIViewController {
     
@@ -33,6 +34,8 @@ class ViewController: UIViewController {
     }
     
     var photoDetails: PhotoDetails?
+    
+    private let dataPersistenece = DataPersistence<PhotoDetails>(filename: "photos.plist")
     @IBOutlet weak var cityForecastLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -123,22 +126,18 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photoDetails = photoDetails else {
+            return
+        }
         
         let forecast = weatherInformation[indexPath.row]
-        let detailVC = DetailViewController()
+        let detailVC = DetailViewController(dataPersistence: dataPersistenece, photoInfo: photoDetails)
         detailVC.weatherInfo = forecast
         detailVC.cityName = cityName
         
         detailVC.photoInfo = photoDetails
         navigationController?.pushViewController(detailVC, animated: true)
         
-//                let article = newsArticles[indexPath.row]
-//        let articleDVC = ArticleDetailViewController()
-//        articleDVC.article = article
-//
-//        // step 4: setting up data persistence and its delegate
-//        articleDVC.dataPersistence = dataPersistence
-//        navigationController?.pushViewController(articleDVC, animated: true)
     }
 }
 
