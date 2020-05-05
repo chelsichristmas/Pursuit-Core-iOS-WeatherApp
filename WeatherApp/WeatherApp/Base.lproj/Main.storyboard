@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ji1-mE-wil">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ji1-mE-wil">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -135,18 +135,57 @@
         <!--Favorites-->
         <scene sceneID="0fN-fo-IwQ">
             <objects>
-                <viewController id="F83-Uu-1Rb" sceneMemberID="viewController">
+                <viewController id="F83-Uu-1Rb" customClass="FavoritesViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1i2-30-8OZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fon-Ye-qIk">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photoCell" rowHeight="231" id="Oi8-Pv-iZi" customClass="PhotoCell" customModule="WeatherApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="231"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oi8-Pv-iZi" id="5h0-vI-QYf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="231"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Of-4V-5br">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="231"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="8Of-4V-5br" secondAttribute="bottom" id="6sY-jF-cpb"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Of-4V-5br" secondAttribute="trailing" id="nj7-03-hOq"/>
+                                                <constraint firstItem="8Of-4V-5br" firstAttribute="leading" secondItem="5h0-vI-QYf" secondAttribute="leading" id="sfj-3g-YuJ"/>
+                                                <constraint firstItem="8Of-4V-5br" firstAttribute="top" secondItem="5h0-vI-QYf" secondAttribute="top" id="xCt-Jk-SEZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="photoImageView" destination="8Of-4V-5br" id="TCI-8T-4qK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fon-Ye-qIk" firstAttribute="leading" secondItem="242-kY-gB1" secondAttribute="leading" id="7cZ-fn-BI5"/>
+                            <constraint firstItem="242-kY-gB1" firstAttribute="trailing" secondItem="fon-Ye-qIk" secondAttribute="trailing" id="Cst-io-EOf"/>
+                            <constraint firstItem="fon-Ye-qIk" firstAttribute="top" secondItem="242-kY-gB1" secondAttribute="top" id="L9g-8g-MEY"/>
+                            <constraint firstItem="242-kY-gB1" firstAttribute="bottom" secondItem="fon-Ye-qIk" secondAttribute="bottom" id="WFF-Gb-H23"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="242-kY-gB1"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" selectedImage="star.fill" catalog="system" id="kd6-kb-cTF"/>
+                    <connections>
+                        <outlet property="tableView" destination="fon-Ye-qIk" id="DTm-uG-IPa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qnl-40-Qs6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="916" y="560"/>
+            <point key="canvasLocation" x="915.94202898550736" y="559.82142857142856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="q7C-IG-6vG">
@@ -189,7 +228,7 @@
     </scenes>
     <resources>
         <image name="clear-day" width="55" height="55"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="star.fill" catalog="system" width="64" height="58"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>
 </document>
